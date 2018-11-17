@@ -1,0 +1,81 @@
+{% set name = "cellpy" %}
+{% set version = "0.2.1" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: e852ea6ab326d8a5f24f979bb86a8b46c668e3cf69f84140e24ac3910ef61076
+
+build:
+  number: 0
+  entry_points:
+    - cellpy=cellpy.cellpy_setup:cli
+#  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv "
+
+requirements:
+  host:
+    - click
+    - matplotlib
+    - numpy
+    - pandas
+    - pip
+    - python
+    - python-box
+    - pyyaml
+    - scipy
+    - setuptools
+    - xlrd
+  run:
+    - click
+    - matplotlib
+    - numpy
+    - pandas
+    - python
+    - python-box
+    - pyyaml
+    - scipy
+    - setuptools
+    - xlrd
+    - lmfit
+
+test:
+  imports:
+    - cellpy
+    - cellpy.parameters
+    - cellpy.readers
+    - cellpy.readers.instruments
+    - cellpy.utils
+    - tests
+  commands:
+    - cellpy --help
+  requires:
+    - click
+    - lmfit
+    - numpy
+    - pandas
+    - pyodbc
+    - pytables
+    - pytest
+    - python-box
+    - pyyaml
+    - matplotlib
+    - scipy
+    - setuptools
+    - xlrd
+
+about:
+  home: https://github.com/jepegit/cellpy
+  license: MIT
+  license_family: MIT
+  license_file: 
+  summary: Extract data from battery cell testers.
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - jepegit
+
